@@ -1,0 +1,46 @@
+ * Permissions access control list.
+ */
+rule TeacherCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.Education.Teacher"
+    operation: READ
+    resource: "org.Education"
+    action: ALLOW
+}
+rule UniversityCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.Education.University"
+    operation: READ
+    resource: "org.Education"
+    action: ALLOW
+}
+rule StudentCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.Education.Student"
+    operation: READ
+    resource: "org.Education"
+    action: ALLOW
+}
+rule StateCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.Education.State"
+    operation: READ
+    resource: "org.Education"
+    action: ALLOW
+}
+rule TeachersCanSubmitTransactions {
+    description: "Allow Teachers to submit transactions"
+    participant: "org.Education.Teacher"
+    operation: CREATE
+    resource: "org.Education.WriteGrade"
+    action: ALLOW
+}
+
+rule OwnerHasFullAccessToTheirAssets {
+    description: "Allow State full access to the asset"
+    participant(p): "org.Education.State"
+    operation: ALL
+    resource(r): "org.Education.StudentGrades"
+    condition: (r.owner.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
