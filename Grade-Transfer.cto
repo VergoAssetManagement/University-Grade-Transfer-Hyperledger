@@ -1,0 +1,42 @@
+/**
+ * Business Network Definition.
+ */
+namespace org.Education
+
+asset StudentGrades identified by RollId {
+  o String RollId
+ --> State owner
+  o String value
+}
+
+participant Teacher identified by TeacherId {
+  o String TeacherId
+  o String firstName
+  o String lastName
+}
+participant University identified by UniversityId {
+  o String UniversityId
+  o String UniversityName
+}
+participant Student identified by StudentId {
+  o String StudentId 
+  o String firstName
+  o String lastName
+}
+participant State identified by StateId {
+  o String StateId
+  o String StateName
+}
+
+transaction WriteGrade identified by transactionId {
+  o String transactionId
+ --> StudentGrades asset
+  o String newValue
+}
+
+event ApplicationEvent identified by eventId {
+  o String eventId
+ --> StudentGrades asset
+  o String oldValue
+  o String newValue
+}
